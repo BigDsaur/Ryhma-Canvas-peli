@@ -1,5 +1,6 @@
 import Player from "./player.js"
 import pointsToScreen from "./points.js";
+import BulletController from "./bulletcontroller.js";
 
 const canvas = document.getElementById('game')
 const ctx = canvas.getContext('2d')
@@ -11,11 +12,14 @@ canvas.height = 800
 const background = new Image()
 background.src = "space.png"
 
-const player = new Player(canvas, 12)
+const playerBulletController = new BulletController(canvas, 15, "yellow", true);
+const player = new Player(canvas, 12, playerBulletController)
+
 
 function game() {
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
     player.draw(ctx)
+    playerBulletController.draw(ctx)
     pointsToScreen(totalPoints);
 }
 
