@@ -14,14 +14,18 @@ const background = new Image()
 background.src = "space.png"
 
 const playerBulletController = new BulletController(canvas, 15, "yellow", true);
+
+const enemyBulletController = new BulletController(canvas, 15, "red", true);
+
 const player = new Player(canvas, 12, playerBulletController)
-const enemy = new Enemy(canvas, 5)
+const enemy = new Enemy(canvas, 5, enemyBulletController)
 
 function game() {
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
     player.draw(ctx)
     enemy.draw(ctx)
     playerBulletController.draw(ctx)
+    enemyBulletController.draw(ctx)
     pointsToScreen(totalPoints);
 }
 
