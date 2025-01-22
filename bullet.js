@@ -1,13 +1,13 @@
 export default class Bullet {
-    constructor(canvas, x, y, velocity, bulletColor, bulletSize) {
+    constructor(canvas, x, y, velocity, bulletImage, bulletSize) {
       this.canvas = canvas;
       this.x = x;
       this.y = y;
       this.velocity = velocity;
       
       this.image = new Image()
-      this.image.src = bulletColor
-      this.bulletColor = this.image  
+      this.image.src = bulletImage
+      this.bulletImage = this.image  
       
       this.width = bulletSize;
       this.height = bulletSize;
