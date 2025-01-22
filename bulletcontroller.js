@@ -4,11 +4,15 @@ export default class BulletController {
   bullets = [];
   timeTillNextBulletAllowed = 0;
 
-  constructor(canvas, maxBulletsAtATime, bulletColor) {
+
+  // bulletColor is now bulletImage and requires image to work
+  // bulletSize now always requires value. This makes for height and width  
+  constructor(canvas, maxBulletsAtATime, bulletImage, joku, bulletSize) {
     this.canvas = canvas;
     this.maxBulletsAtATime = maxBulletsAtATime;
-    this.bulletColor = bulletColor;
-
+    this.bulletImage = bulletImage;
+    
+    this.bulletSize = bulletSize
   }
 
   draw(ctx) {
@@ -39,8 +43,8 @@ export default class BulletController {
     if (
       this.timeTillNextBulletAllowed <= 0 &&
       this.bullets.length < this.maxBulletsAtATime
-    ) {
-      const bullet = new Bullet(this.canvas, x, y, velocity, this.bulletColor);
+    ) {    
+      const bullet = new Bullet(this.canvas, x, y, velocity, this.bulletImage, this.bulletSize);
       this.bullets.push(bullet);
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }

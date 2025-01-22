@@ -1,19 +1,21 @@
 export default class Bullet {
-    constructor(canvas, x, y, velocity, bulletColor) {
+    constructor(canvas, x, y, velocity, bulletImage, bulletSize) {
       this.canvas = canvas;
       this.x = x;
       this.y = y;
       this.velocity = velocity;
-      this.bulletColor = bulletColor;
-  
-      this.width = 5;
-      this.height = 20;
+      
+      this.image = new Image()
+      this.image.src = bulletImage
+      this.bulletImage = this.image  
+      
+      this.width = bulletSize;
+      this.height = bulletSize;
     }
   
     draw(ctx) {
       this.y -= this.velocity;
-      ctx.fillStyle = this.bulletColor;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
   
     collideWith(sprite) {
