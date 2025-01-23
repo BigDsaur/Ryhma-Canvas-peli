@@ -13,6 +13,7 @@ let totalPoints = 5000
 canvas.width = 800
 canvas.height = 800
 
+// Moving/Looping background
 function component() {
     this.image = new Image();
     this.image.src = "./space.png";
