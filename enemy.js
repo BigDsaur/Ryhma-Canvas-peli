@@ -11,7 +11,7 @@ export default class Enemy {
         this.y = this.canvas.height / 8;
         this.width = 128;
         this.height = 128;
-        this.health = 5;
+        this.health = 25;
     
         this.image = new Image();
         this.image.src = "./art/enemy.png";
