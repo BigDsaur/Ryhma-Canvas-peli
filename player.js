@@ -15,7 +15,7 @@ export default class Player {
       this.width = 50;
       this.height = 48;
       this.image = new Image();
-      this.image.src = "player.png";
+      this.image.src = "./art/player.png";
 
       document.addEventListener("keydown", (event) => this.keydown(event));
       document.addEventListener("keyup", (event) => this.keyup(event));

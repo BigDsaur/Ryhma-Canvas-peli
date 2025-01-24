@@ -3,38 +3,23 @@ import pointsToScreen from "./points.js";
 import Enemy from "./enemy.js"
 import BulletController from "./bulletcontroller.js";
 import Projectile from "./projectile.js";
+import background from "./background.js";
+
 
 const canvas = document.getElementById('game')
 const ctx = canvas.getContext('2d')
 
-const background = new component()
+const movingbackground = new background(canvas)
 
 let totalPoints = 5000
 canvas.width = 800
 canvas.height = 800
 
-// Moving/Looping background
-function component() {
-    this.image = new Image();
-    this.image.src = "./space.png";
-    this.width = 800;
-    this.height = 800;
-    this.speedY = 1;
-    this.x = 0;
-    this.y = 0;
+const playerBulletController = new BulletController(canvas, 15, "./art/playerBullet.png", true, 16);
+const enemyBulletController = new BulletController(canvas, 16, "./art/bullet.png", true, 32);
+const enemyBulletController2 = new BulletController(canvas, 1, "./art/bullet.png", true, 24);
+const enemyBulletController3 = new BulletController(canvas, 8, "./art/bullet.png", true, 64);
 
-    this.update = function() {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        ctx.drawImage(this.image, this.x, this.y - this.height, this.width, this.height);           
-        this.y += this.speedY;
-        if (this.y >= this.height) {
-            this.y = 0;
-        }  
-    }
-}
-
-const playerBulletController = new BulletController(canvas, 15, "playerBullet.png", true, 16);
-const enemyBulletController = new BulletController(canvas, 5, "bullet.png", true, 32);
 const projectiles = [];
 
 canvas.addEventListener("click", (event) => {
@@ -44,14 +29,16 @@ canvas.addEventListener("click", (event) => {
 
 
 const player = new Player(canvas, 8, playerBulletController)
-const enemy = new Enemy(canvas, 2, enemyBulletController)
+const enemy = new Enemy(canvas, 3.45, enemyBulletController, enemyBulletController2, enemyBulletController3)
 
 function game() {
-    background.update()
+    movingbackground.draw(ctx)
     player.draw(ctx)
     enemy.draw(ctx)
     playerBulletController.draw(ctx)
     enemyBulletController.draw(ctx)
+    enemyBulletController2.draw(ctx)
+    enemyBulletController3.draw(ctx)
 
     pointsToScreen(totalPoints);
 
