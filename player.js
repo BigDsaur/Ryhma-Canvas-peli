@@ -14,12 +14,29 @@ export default class Player {
       this.y = this.canvas.height - 75;
       this.width = 50;
       this.height = 48;
+      this.health = 1000;
       this.image = new Image();
       this.image.src = "./art/player.png";
 
       document.addEventListener("keydown", (event) => this.keydown(event));
       document.addEventListener("keyup", (event) => this.keyup(event));
   }
+
+    takeDamage() {
+        this.health -= 1;
+        console.log(`player hit! Health: ${this.health}`);
+        }
+
+    isHit(enemyBulletControllers) {
+        for (let controller of enemyBulletControllers) {
+            if (controller.collideWith(this)) {
+                console.log("Player hit by enemy bullet!");
+                return true; // Player is hit
+            }
+        }
+        return false; // No collision
+    }
+        
 
   draw(ctx) {
       if (this.shootPressed) {

@@ -16,9 +16,9 @@ canvas.height = 800
 
 const points = new Points();
 const playerBulletController = new BulletController(canvas, 15, "./art/playerBullet.png", true, 16);
-const enemyBulletController = new BulletController(canvas, 16, "./art/bullet.png", true, 32);
-const enemyBulletController2 = new BulletController(canvas, 1, "./art/bullet.png", true, 24);
-const enemyBulletController3 = new BulletController(canvas, 8, "./art/bullet.png", true, 64);
+const enemyBulletController = new BulletController(canvas, 14, "./art/bullet.png", true, 32);
+const enemyBulletController2 = new BulletController(canvas, 2, "./art/bullet.png", true, 24);
+const enemyBulletController3 = new BulletController(canvas, 6, "./art/bullet.png", true, 64);
 
 const projectiles = [];
 
@@ -28,8 +28,9 @@ canvas.addEventListener("click", (event) => {
 });
 
 
-const player = new Player(canvas, 8, playerBulletController)
+const player = new Player(canvas, 6, playerBulletController)
 const enemy = new Enemy(canvas, 3.45, enemyBulletController, enemyBulletController2, enemyBulletController3)
+const enemyBulletControllers = [enemyBulletController, enemyBulletController2, enemyBulletController3];
 
 function game() {
     movingbackground.draw(ctx)
@@ -37,9 +38,12 @@ function game() {
     player.draw(ctx)
     enemy.draw(ctx)
     playerBulletController.draw(ctx)
-    enemyBulletController.draw(ctx)
-    enemyBulletController2.draw(ctx)
-    enemyBulletController3.draw(ctx)
+    enemyBulletControllers.forEach((controller) => controller.draw(ctx));
+
+    if (player.isHit(enemyBulletControllers)) {
+        player.takeDamage();
+        console.log("Player has been hit!");
+    }
 
     for (let i = projectiles.length - 1; i >= 0; i--) {
         projectiles[i].update();
