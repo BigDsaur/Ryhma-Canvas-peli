@@ -12,3 +12,4 @@ export default class Points{
         ctx.font = "20px Arial";
         ctx.fillText(`Score: ${this.points}`, 10, 30);
     }
+}
