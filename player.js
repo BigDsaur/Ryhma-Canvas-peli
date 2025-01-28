@@ -1,5 +1,4 @@
 import Projectile from "./projectile.js";
-
 export default class Player {
   rightPressed = false;
   leftPressed = false;
@@ -9,17 +8,33 @@ export default class Player {
       this.canvas = canvas;
       this.velocity = velocity;
       this.bulletController = bulletController;
-
       this.x = this.canvas.width / 2;
       this.y = this.canvas.height - 75;
       this.width = 50;
       this.height = 46;
+      this.health = 1000;
       this.image = new Image();
       this.image.src = "./art/player.png";
 
       document.addEventListener("keydown", (event) => this.keydown(event));
       document.addEventListener("keyup", (event) => this.keyup(event));
   }
+
+    takeDamage() {
+        this.health -= 1;
+        console.log(`player hit! Health: ${this.health}`);
+        }
+
+    isHit(enemyBulletControllers) {
+        for (let controller of enemyBulletControllers) {
+            if (controller.collideWith(this)) {
+                console.log("Player hit by enemy bullet!");
+                return true; // Player is hit
+            }
+        }
+        return false; // No collision
+    }
+
 
   draw(ctx) {
       if (this.shootPressed) {
@@ -29,7 +44,6 @@ export default class Player {
       this.collideWithWalls();
       ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
-
   collideWithWalls() {
       if (this.x < 42) {
           this.x = 42;
@@ -38,7 +52,6 @@ export default class Player {
           this.x = this.canvas.width -42 - this.width;
       }
   }
-
   move() {
       if (this.rightPressed) {
           this.x += this.velocity;
@@ -47,7 +60,6 @@ export default class Player {
           this.x -= this.velocity;
       }
   }
-
   keydown(event) {
       if (event.code === "ArrowRight" || event.code === "KeyD") {
           this.rightPressed = true;
@@ -62,7 +74,6 @@ export default class Player {
           console.log("Shoot");
       }
   }
-
   keyup(event) {
       if (event.code === "ArrowRight" || event.code === "KeyD") {
           this.rightPressed = false;
@@ -74,13 +85,10 @@ export default class Player {
           this.shootPressed = false;
       }
   }
-
   shoot(event, canvas) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
     return new Projectile(this.x + this.width / 2 - 2.5, this.y, mouseX, mouseY);
 }
-
 }
-
