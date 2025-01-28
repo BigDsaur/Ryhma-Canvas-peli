@@ -14,9 +14,22 @@ body {
     margin: 0;
 }
 
-#game {
+#canvas {
     background-color: white;
     border-radius: 4px;
     box-shadow: black 20px 10px 50px;
-    margin-top: 80px;
+}
+
+h1 {
+    margin-left: 32%;
+}
+
+#pts-box {
+    margin-top: 100px;
+    margin-left: 25px;
+    padding: 5px;
+    background-color: yellow;
+    border: pink, 5px, solid;
+    border-radius: 5px;
+    color: black;
 }

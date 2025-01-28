@@ -1,24 +1,29 @@
 export default class Enemy {
-    constructor(canvas, velocity, bulletController, bulletController2, bulletController3) {
+    constructor(canvas, velocity, bulletController, bulletController2, bulletController3, bulletController4) {
         this.canvas = canvas;
         this.velocity = velocity;
         this.tempVelocity = velocity;
         this.bulletController = bulletController;
         this.bulletController2 = bulletController2;
         this.bulletController3 = bulletController3;
+        this.bulletController4 = bulletController4;
+        
 
         this.x = this.canvas.width / 2;
         this.y = this.canvas.height / 8;
         this.width = 128;
         this.height = 128;
-        this.health = 25;
+        this.health = 1;
     
         this.image = new Image();
-        this.image.src = "./art/enemy.png";
+        this.image.src = "./art/dentonator.png";
     }
 
     takeDamage() {
         this.health -= 1;
+        if ( this.health === 0) {
+            window.location.replace("./index.html");
+        }
         console.log(`Enemy hit! Health: ${this.health}`);
     }
 
@@ -32,7 +37,6 @@ export default class Enemy {
         );
     }
 
-    // yhdistin colliden ja liikumisen
     move() {
         this.x += this.velocity;
 
@@ -41,11 +45,16 @@ export default class Enemy {
         }
     }
 
-    draw(ctx) {
-        this.bulletController.shoot(this.x + this.width / 2, this.y + 100, -4, 4);
-        this.bulletController2.shoot(this.x + 25 + this.width / 2, this.y + 100, -6, 50);
-        this.bulletController3.shoot(this.x - 25 + this.width / 2, this.y + 100, -1.5, 125);
+    draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4) {
+        this.bulletController.shoot(this.x + this.width / 2, this.y + 100, -4, 6.5);
+        this.bulletController2.shoot(this.x + this.width / 2, this.y + 100, -1.9, 3.25);
+        this.bulletController3.shoot(this.x + this.width / 2 - 25, this.y + 100, -10, 3);
+        this.bulletController4.shoot(this.x + this.width / 2 + 25, this.y + 100, -10, 3);
         this.move();
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        enemyBulletController.draw(ctx)
+        enemyBulletController2.draw(ctx)
+        enemyBulletController3.draw(ctx)
+        enemyBulletController4.draw(ctx)
     }
 }

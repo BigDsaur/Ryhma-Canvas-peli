@@ -4,7 +4,8 @@ import BulletController from "./bulletcontroller.js";
 import Projectile from "./projectile.js";
 import Background from "./background.js";
 
-import Dentonator from "./dentonator.js"
+import Dentonator from "./enemies/dentonator.js"
+import Warper from "./enemies/warper.js"
 
 const canvas = document.getElementById('game')
 const ctx = canvas.getContext('2d')
@@ -28,19 +29,25 @@ canvas.addEventListener("click", (event) => {
 const selectedEnemy = localStorage.getItem("selectedEnemy")
 console.log(selectedEnemy);
 
-if (selectedEnemy === "Dentonator") {
-    var enemyBulletController = new BulletController(canvas, 16, "./art/bullet.png", true, 32);
-    var enemyBulletController2 = new BulletController(canvas, 1, "./art/bullet.png", true, 64);
-    var enemyBulletController3 = new BulletController(canvas, 1, "./art/bullet.png", true, 16);
-    var enemyBulletController4 = new BulletController(canvas, 1, "./art/bullet.png", true, 16);
-    var dentonator = new Dentonator(canvas, 3.45, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
+if (selectedEnemy === "dentonator") {
+    var enemyBulletController = new BulletController(canvas, 16, "./art/dentonatorbullet.png", true, 32);
+    var enemyBulletController2 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", true, 64);
+    var enemyBulletController3 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", true, 16);
+    var enemyBulletController4 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", true, 16);
+    var enemy = new Dentonator(canvas, 3.45, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
+} else if (selectedEnemy === "warper") {
+    var enemyBulletController = new BulletController(canvas, 16, "./art/warperbullet.png", true, 32);
+    var enemyBulletController2 = new BulletController(canvas, 1, "./art/warperbullet.png", true, 64);
+    var enemyBulletController3 = new BulletController(canvas, 1, "./art/warperbullet.png", true, 16);
+    var enemyBulletController4 = new BulletController(canvas, 1, "./art/warperbullet.png", true, 16);
+    var enemy = new Warper(canvas, 3.45, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
 }
 
 
 function game() {
     movingbackground.draw(ctx)
     player.draw(ctx)
-    dentonator.draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
+    enemy.draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
     playerBulletController.draw(ctx)
     pointsToScreen(totalPoints);
 
@@ -49,8 +56,8 @@ function game() {
         projectiles[i].draw(ctx);
 
         // Check collision with enemy
-        if (dentonator.isHit(projectiles[i])) {
-            dentonator.takeDamage();
+        if (enemy.isHit(projectiles[i])) {
+            enemy.takeDamage();
             projectiles.splice(i, 1);
         } else if (projectiles[i].outOfBounds(canvas)) {
             projectiles.splice(i, 1);
