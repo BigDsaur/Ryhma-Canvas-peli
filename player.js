@@ -13,7 +13,7 @@ export default class Player {
       this.x = this.canvas.width / 2;
       this.y = this.canvas.height - 75;
       this.width = 50;
-      this.height = 48;
+      this.height = 46;
       this.health = 1000;
       this.image = new Image();
       this.image.src = "./art/player.png";
@@ -48,11 +48,11 @@ export default class Player {
   }
 
   collideWithWalls() {
-      if (this.x < 0) {
-          this.x = 0;
+      if (this.x < 42) {
+          this.x = 42;
       }
-      if (this.x > this.canvas.width - this.width) {
-          this.x = this.canvas.width - this.width;
+      if (this.x > this.canvas.width -42 - this.width) {
+          this.x = this.canvas.width -42 - this.width;
       }
   }
 
