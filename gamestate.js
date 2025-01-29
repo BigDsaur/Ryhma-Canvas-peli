@@ -1,9 +1,8 @@
 import Player from "./player.js"
 import Points from "./points.js";
 import BulletController from "./bulletcontroller.js";
-import Projectile from "./projectile.js";
+import Health from "./health.js"
 import Background from "./background.js";
-
 import Dentonator from "./enemies/dentonator.js"
 import Warper from "./enemies/warper.js"
 
@@ -11,6 +10,7 @@ const canvas = document.getElementById('game')
 const ctx = canvas.getContext('2d')
 
 const movingbackground = new Background(canvas)
+const showhp = new Health(canvas)
 
 const points = new Points();
 canvas.width = 800
@@ -52,10 +52,11 @@ function game() {
     enemy.draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
     playerBulletController.draw(ctx)
     points.draw(ctx)
+    showhp.draw(ctx)
 
-    if (player.isHit(enemyBulletControllers)) {
-        player.takeDamage();
-    }
+    // if (player.isHit(enemyBulletControllers)) {
+    //     player.takeDamage();
+    // }
 
     for (let i = projectiles.length - 1; i >= 0; i--) {
         projectiles[i].update();
