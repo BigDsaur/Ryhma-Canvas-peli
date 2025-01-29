@@ -4,12 +4,12 @@ export default class BulletController {
   bullets = [];
   timeTillNextBulletAllowed = 0;
 
-  constructor(canvas, maxBulletsAtATime, bulletImage, joku, bulletSize) {
+  constructor(canvas, maxBulletsAtATime, bulletImage, isPlayer, bulletSize) {
     this.canvas = canvas;
     this.maxBulletsAtATime = maxBulletsAtATime;
     this.bulletImage = bulletImage;
-    
     this.bulletSize = bulletSize
+    this.isPlayer = isPlayer;
   }
 
   draw(ctx) {
@@ -45,5 +45,21 @@ export default class BulletController {
       this.bullets.push(bullet);
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }
+  }
+  checkBulletCollisions(enemyBulletController) {
+    this.bullets.forEach((playerBullet, playerIndex) => {
+        if (!this.isPlayer) return; // ✅ Only player bullets should check for enemy bullets
+        enemyBulletController.bullets.forEach((enemyBullet, enemyIndex) => {
+            if (
+                playerBullet.x < enemyBullet.x + enemyBullet.width &&
+                playerBullet.x + playerBullet.width > enemyBullet.x &&
+                playerBullet.y < enemyBullet.y + enemyBullet.height &&
+                playerBullet.y + playerBullet.height > enemyBullet.y
+            ) {
+                console.log("💥 Bullet Collision! Player bullet hit enemy bullet!");
+                enemyBulletController.bullets.splice(enemyIndex, 1);
+            }
+        });
+    });
   }
 }

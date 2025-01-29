@@ -21,8 +21,8 @@ export default class Enemy {
         this.image.src = "./art/warper.png";
     }
 
-    takeDamage() {
-        this.health -= 1;
+    takeDamage(amount) {
+        this.health -= amount;
         if ( this.health === 0) {
             window.location.replace("./index.html");
         }
