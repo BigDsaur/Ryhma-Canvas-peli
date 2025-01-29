@@ -4,9 +4,6 @@ export default class BulletController {
   bullets = [];
   timeTillNextBulletAllowed = 0;
 
-
-  // bulletColor is now bulletImage and requires image to work
-  // bulletSize now always requires value. This makes for height and width  
   constructor(canvas, maxBulletsAtATime, bulletImage, joku, bulletSize) {
     this.canvas = canvas;
     this.maxBulletsAtATime = maxBulletsAtATime;

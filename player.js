@@ -25,6 +25,7 @@ export default class Player {
     takeDamage() {
         this.health -= 1;
         console.log(`player hit! Health: ${this.health}`);
+        window.location.replace("./index.html");
         }
 
     isHit(enemyBulletControllers) {

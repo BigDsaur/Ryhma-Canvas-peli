@@ -16,7 +16,7 @@ export default class Enemy {
         this.health = 1;
     
         this.image = new Image();
-        this.image.src = "./art/enemy.png";
+        this.image.src = "./art/warper.png";
     }
 
     takeDamage() {
@@ -37,13 +37,23 @@ export default class Enemy {
         );
     }
 
-    // yhdistin colliden ja liikumisen
     move() {
-        this.x += this.velocity;
+        const warp = Math.floor(Math.random() * 91);
+        this.x += this.velocity * 1.5;
 
-        if (this.x <= 0 || this.x + this.width >= this.canvas.width) {
+        if (warp === 4) {
+            this.x = Math.floor(Math.random() * 675);
+            console.log("warped to", this.x);
+            
+        } else if (warp === 2 && this.velocity === -3.45) {
+            this.velocity *= -1;      
+        } else if (warp === 3 && this.velocity === 3.45) {
+            this.velocity *= -1;
+        } else if (this.x <= 0 || this.x + this.width >= this.canvas.width) {
             this.velocity *= -1;
         }
+
+        
     }
 
     draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4) {
