@@ -13,14 +13,14 @@ export default class Enemy {
         this.y = this.canvas.height / 8;
         this.width = 128;
         this.height = 128;
-        this.health = 1;
+        this.health = 30;
     
         this.image = new Image();
         this.image.src = "./art/warper.png";
     }
 
-    takeDamage() {
-        this.health -= 1;
+    takeDamage(amount) {
+        this.health -= amount;
         if ( this.health === 0) {
             window.location.replace("./index.html");
         }
