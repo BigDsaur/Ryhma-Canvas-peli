@@ -13,7 +13,7 @@ export default class Enemy {
         this.y = this.canvas.height / 8;
         this.width = 128;
         this.height = 128;
-        this.health = 100;
+        this.health = 1;
         localStorage.setItem("fullhp", this.health)
         localStorage.setItem("currenthp", this.health)  
     
@@ -23,9 +23,6 @@ export default class Enemy {
 
     takeDamage(amount) {
         this.health -= amount;
-        if ( this.health === 0) {
-            window.location.replace("./index.html");
-        }
         localStorage.setItem("currenthp", this.health)    
     }
 

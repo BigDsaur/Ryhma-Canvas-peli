@@ -18,7 +18,7 @@ function game() {
     ctx.drawImage(title, 150, 100, 500, 100)
 
     for (let i = 1; i <= levels; i++) {
-        buttons[`button${i}`] = new Button(i, `${i}00`, 300);
+        buttons[`button${i}`] = new Button(i, `${i}00`, 300, 64, 64);
         buttons[`button${i}`].draw(ctx);
     }
 }
