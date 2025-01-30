@@ -1,16 +1,22 @@
 import Player from "./player.js"
 import Points from "./points.js";
 import BulletController from "./bulletcontroller.js";
-import Projectile from "./projectile.js";
+import Health from "./health.js"
 import Background from "./background.js";
-
 import Dentonator from "./enemies/dentonator.js"
 import Warper from "./enemies/warper.js"
+import Button from "./levels.js";
 
 const canvas = document.getElementById('game')
 const ctx = canvas.getContext('2d')
 
 const movingbackground = new Background(canvas)
+const showhp = new Health(canvas)
+
+let playeralive = true
+
+const defeatbutton = new Button("defeat", 75, 525, 550, 200)
+const victorybutton = new Button("victory", 75, 525, 550, 200)
 
 const points = new Points();
 canvas.width = 800
@@ -48,39 +54,65 @@ if (selectedEnemy === "dentonator") {
 
 function game() {
     movingbackground.draw(ctx)
-    player.draw(ctx)
-    enemy.draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
-    playerBulletController.draw(ctx)
     points.draw(ctx)
-
-    playerBulletController.checkBulletCollisions(enemyBulletController);
-    playerBulletController.checkBulletCollisions(enemyBulletController2);
-    playerBulletController.checkBulletCollisions(enemyBulletController3);
-    playerBulletController.checkBulletCollisions(enemyBulletController4);
-
-    if (playerBulletController.collideWith(enemy)) {
-        enemy.takeDamage(5);
-        points.addPoints(50);
+    showhp.draw(ctx)
+    
+    if (localStorage.getItem("currenthp") > 0) {
+        enemy.draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
+    } else if (localStorage.getItem("currenthp") == 0) {       
+        victorybutton.draw(ctx)
     }
 
-    if (player.isHit(enemyBulletControllers)) {
-        player.takeDamage();
+
+    if (playeralive == true) {
+     
+        playerBulletController.checkBulletCollisions(enemyBulletController);
+        playerBulletController.checkBulletCollisions(enemyBulletController2);
+        playerBulletController.checkBulletCollisions(enemyBulletController3);
+        playerBulletController.checkBulletCollisions(enemyBulletController4);
+        if (playerBulletController.collideWith(enemy)) {
+            enemy.takeDamage(5);
+            points.addPoints(50);
+
     }
+        playerBulletController.draw(ctx)
+        player.draw(ctx)
 
-    for (let i = projectiles.length - 1; i >= 0; i--) {
-        projectiles[i].update();
-        projectiles[i].draw(ctx);
-
-        // Check collision with enemy
-        if (enemy.isHit(projectiles[i])) {
-            enemy.takeDamage(1);
-            points.addPoints(10);
-            projectiles.splice(i, 1);
-        } else if (projectiles[i].outOfBounds(canvas)) {
-            projectiles.splice(i, 1);
+        if (player.isHit(enemyBulletControllers) && localStorage.getItem("currenthp") > 0) {
+            player.takeDamage(ctx);
+            playeralive = false 
         }
+
+
+        for (let i = projectiles.length - 1; i >= 0; i--) {
+            projectiles[i].update();
+            projectiles[i].draw(ctx);
+
+            // Check collision with enemy
+            if (enemy.isHit(projectiles[i])) {
+                enemy.takeDamage(1);
+                points.addPoints(10);
+                projectiles.splice(i, 1);
+            } else if (projectiles[i].outOfBounds(canvas)) {
+                projectiles.splice(i, 1);
+            }
+        }
+        
+    } else if (playeralive == false) {      
+        defeatbutton.draw(ctx);
     }
 
+
+    
 }
+canvas.addEventListener('click', function(event) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    if (defeatbutton.isClicked(mouseX, mouseY) && playeralive == false) {
+        defeatbutton.onClick(playeralive);
+    }
+});
+
 
 setInterval(game, 1000 / 60)

@@ -47,7 +47,7 @@ export default class BulletController {
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }
   }
-
+  
   checkBulletCollisions(enemyBulletController) {
     this.bullets.forEach((playerBullet, playerIndex) => {
         if (!this.isPlayer) return; // ✅ Only player bullets should check for enemy bullets

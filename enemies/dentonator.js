@@ -13,7 +13,9 @@ export default class Enemy {
         this.y = this.canvas.height / 8;
         this.width = 128;
         this.height = 128;
-        this.health = 30;
+        this.health = 1;
+        localStorage.setItem("fullhp", this.health)
+        localStorage.setItem("currenthp", this.health)  
     
         this.image = new Image();
         this.image.src = "./art/dentonator.png";
@@ -21,10 +23,11 @@ export default class Enemy {
 
     takeDamage(amount) {
         this.health -= amount;
+        localStorage.setItem("currenthp", this.health)    
+
         if ( this.health === 0) {
             window.location.replace("./index.html");
         }
-        console.log(`Enemy hit! Health: ${this.health}`);
     }
 
     isHit(projectile) {
