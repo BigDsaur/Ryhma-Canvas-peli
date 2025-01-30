@@ -63,6 +63,7 @@ function game() {
         victorybutton.draw(ctx)
     }
 
+
     if (playeralive == true) {
      
         playerBulletController.checkBulletCollisions(enemyBulletController);
@@ -72,6 +73,7 @@ function game() {
         if (playerBulletController.collideWith(enemy)) {
             enemy.takeDamage(5);
             points.addPoints(50);
+
     }
         playerBulletController.draw(ctx)
         player.draw(ctx)
@@ -80,6 +82,7 @@ function game() {
             player.takeDamage(ctx);
             playeralive = false 
         }
+
 
         for (let i = projectiles.length - 1; i >= 0; i--) {
             projectiles[i].update();

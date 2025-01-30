@@ -37,6 +37,7 @@ export default class BulletController {
   }
 
   shoot(x, y, velocity, timeTillNextBulletAllowed = 0) {
+    
     if (
       this.timeTillNextBulletAllowed <= 0 &&
       this.bullets.length < this.maxBulletsAtATime
@@ -46,9 +47,11 @@ export default class BulletController {
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }
   }
+  
   checkBulletCollisions(enemyBulletController) {
     this.bullets.forEach((playerBullet, playerIndex) => {
         if (!this.isPlayer) return; // ✅ Only player bullets should check for enemy bullets
+
         enemyBulletController.bullets.forEach((enemyBullet, enemyIndex) => {
             if (
                 playerBullet.x < enemyBullet.x + enemyBullet.width &&
