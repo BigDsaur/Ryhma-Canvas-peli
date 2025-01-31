@@ -21,10 +21,7 @@ export default class Enemy {
 
     takeDamage(amount) {
         this.health -= amount;
-        if ( this.health === 0) {
-            window.location.replace("./index.html");
-        }
-        console.log(`Enemy hit! Health: ${this.health}`);
+        localStorage.setItem("currenthp", this.health)
     }
 
     isHit(projectile) {
