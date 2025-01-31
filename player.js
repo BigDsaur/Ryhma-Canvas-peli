@@ -1,4 +1,5 @@
 import Projectile from "./projectile.js";
+import Button from "./levels.js";
 
 export default class Player {
   rightPressed = false;
@@ -25,23 +26,22 @@ export default class Player {
     takeDamage() {
         this.health -= 1;
         console.log(`player hit! Health: ${this.health}`);
-        window.location.replace("./index.html");
-        }
+    }
 
     isHit(enemyBulletControllers) {
         for (let controller of enemyBulletControllers) {
             if (controller.collideWith(this)) {
                 console.log("Player hit by enemy bullet!");
-                return true; // Player is hit
+                return true; 
             }
         }
-        return false; // No collision
+        return false; 
     }
         
 
   draw(ctx) {
       if (this.shootPressed) {
-          this.bulletController.shoot(this.x + this.width / 2, this.y, 4, 10);
+          this.bulletController.shoot(this.x + this.width / 2, this.y, 6, 10);
       }
       this.move();
       this.collideWithWalls();
