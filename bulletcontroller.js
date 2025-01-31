@@ -4,14 +4,15 @@ export default class BulletController {
   bullets = [];
   timeTillNextBulletAllowed = 0;
 
-  constructor(canvas, maxBulletsAtATime, bulletImage, isPlayer, bulletSize) {
+  constructor(canvas, maxBulletsAtATime, bulletImage, isPlayer, bulletWidth, bulletHeight) {
     this.canvas = canvas;
     this.maxBulletsAtATime = maxBulletsAtATime;
     this.bulletImage = bulletImage;
-    this.bulletSize = bulletSize
+    this.bulletWidth = bulletWidth
+    this.bulletHeight = bulletHeight
     this.isPlayer = isPlayer;
   }
-
+  
   draw(ctx) {
     this.bullets = this.bullets.filter(
       (bullet) => bullet.y + bullet.width > 0 && bullet.y <= this.canvas.height
@@ -35,7 +36,7 @@ export default class BulletController {
 
     return false;
   }
-
+  
   shoot(x, y, velocity, timeTillNextBulletAllowed = 0) {
     
     if (
@@ -49,8 +50,8 @@ export default class BulletController {
   }
 
   checkBulletCollisions(enemyBulletController) {
-    this.bullets.forEach((playerBullet, playerIndex) => {
-        if (!this.isPlayer) return; // ✅ Only player bullets should check for enemy bullets
+    this.bullets.forEach((playerBullet) => {
+        if (!this.isPlayer) return;
 
         enemyBulletController.bullets.forEach((enemyBullet, enemyIndex) => {
             if (
