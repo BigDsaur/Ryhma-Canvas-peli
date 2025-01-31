@@ -11,17 +11,16 @@ export default class Enemy {
         this.width = 128;
         this.height = 128;
         this.health = 100;
-    
+        localStorage.setItem("fullhp", this.health)
+        localStorage.setItem("currenthp", this.health)  
+
         this.image = new Image();
         this.image.src = "./art/tank.png";
     }
 
     takeDamage(amount) {
         this.health -= amount;
-        if ( this.health <= 0) {
-            window.location.replace("./index.html");
-        }
-        console.log(`Enemy hit! Health: ${this.health}`);
+        localStorage.setItem("currenthp", this.health)
     }
 
     isHit(projectile) {
