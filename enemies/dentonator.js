@@ -13,7 +13,7 @@ export default class Enemy {
         this.y = this.canvas.height / 8;
         this.width = 128;
         this.height = 128;
-        this.health = 1;
+        this.health = 50;
         localStorage.setItem("fullhp", this.health)
         localStorage.setItem("currenthp", this.health)  
     
