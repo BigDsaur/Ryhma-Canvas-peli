@@ -15,8 +15,8 @@ export default class Button {
         return mouseX >= this.x && mouseX <= this.x + this.width &&
                 mouseY >= this.y && mouseY <= this.y + this.height;
     }
-    onClick(playeralive) {
-        if (playeralive == false) {
+    onClick(result) {
+        if (result == true) {
             window.location.replace("./index.html");
         } else if (!this.clicked) {
             window.location.replace("./gamestate.html");

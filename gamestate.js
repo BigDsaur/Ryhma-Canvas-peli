@@ -68,7 +68,7 @@ function game() {
     
     if (localStorage.getItem("currenthp") > 0) {
         enemy.draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
-    } else if (localStorage.getItem("currenthp") == 0) {         
+    } else if (localStorage.getItem("currenthp") <= 0) {         
         victorybutton.draw(ctx)
     }
 
@@ -119,17 +119,9 @@ canvas.addEventListener('click', function(event) {
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
     if (defeatbutton.isClicked(mouseX, mouseY) && playeralive == false) {
-        defeatbutton.onClick(playeralive);
-    }
-});
-
-
-canvas.addEventListener('click', function(event) {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-    if (defeatbutton.isClicked(mouseX, mouseY) && playeralive == false) {
-        defeatbutton.onClick(playeralive);
+        defeatbutton.onClick(true);
+    } else if (victorybutton.isClicked(mouseX, mouseY) && playeralive == true) {
+        victorybutton.onClick(true);
     }
 });
 
