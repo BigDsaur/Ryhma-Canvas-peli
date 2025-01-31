@@ -1,5 +1,5 @@
 export default class Bullet {
-    constructor(canvas, x, y, velocity, bulletImage, bulletSize) {
+    constructor(canvas, x, y, velocity, bulletImage, bulletHeight, bulletWidth) {
       this.canvas = canvas;
       this.x = x;
       this.y = y;
@@ -9,8 +9,8 @@ export default class Bullet {
       this.image.src = bulletImage
       this.bulletImage = this.image  
       
-      this.width = bulletSize;
-      this.height = bulletSize;
+      this.width = bulletWidth;
+      this.height = bulletHeight;
     }
   
     draw(ctx) {

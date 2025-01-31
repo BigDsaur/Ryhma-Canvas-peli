@@ -4,14 +4,15 @@ export default class BulletController {
   bullets = [];
   timeTillNextBulletAllowed = 0;
 
-  constructor(canvas, maxBulletsAtATime, bulletImage, isPlayer, bulletSize) {
+  constructor(canvas, maxBulletsAtATime, bulletImage, isPlayer, bulletWidth, bulletHeight) {
     this.canvas = canvas;
     this.maxBulletsAtATime = maxBulletsAtATime;
     this.bulletImage = bulletImage;
-    this.bulletSize = bulletSize
+    this.bulletWidth = bulletWidth
+    this.bulletHeight = bulletHeight
     this.isPlayer = isPlayer;
   }
-
+  
   draw(ctx) {
     this.bullets = this.bullets.filter(
       (bullet) => bullet.y + bullet.width > 0 && bullet.y <= this.canvas.height
@@ -42,7 +43,7 @@ export default class BulletController {
       this.timeTillNextBulletAllowed <= 0 &&
       this.bullets.length < this.maxBulletsAtATime
     ) {    
-      const bullet = new Bullet(this.canvas, x - 20, y, velocity, this.bulletImage, this.bulletSize);
+      const bullet = new Bullet(this.canvas, x - 20, y, velocity, this.bulletImage, this.bulletWidth, this.bulletHeight);
       this.bullets.push(bullet);
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }

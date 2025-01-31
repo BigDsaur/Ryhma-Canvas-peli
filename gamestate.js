@@ -22,7 +22,7 @@ const points = new Points();
 canvas.width = 800
 canvas.height = 800
 
-const playerBulletController = new BulletController(canvas, 1, "./art/playerBullet.png", true, 40);
+const playerBulletController = new BulletController(canvas, 1, "./art/playerBullet.png", true, 40, 40);
 const player = new Player(canvas, 8, playerBulletController)
 
 const projectiles = [];
@@ -36,17 +36,17 @@ const selectedEnemy = localStorage.getItem("selectedEnemy")
 console.log(selectedEnemy);
 
 if (selectedEnemy === "dentonator") {
-    var enemyBulletController = new BulletController(canvas, 16, "./art/dentonatorbullet.png", false, 32);
-    var enemyBulletController2 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", false, 64);
-    var enemyBulletController3 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", false, 16);
-    var enemyBulletController4 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", false, 16);
+    var enemyBulletController = new BulletController(canvas, 16, "./art/dentonatorbullet.png", false, 32, 32);
+    var enemyBulletController2 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", false, 64, 64);
+    var enemyBulletController3 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", false, 16, 16);
+    var enemyBulletController4 = new BulletController(canvas, 1, "./art/dentonatorbullet.png", false, 16, 16);
     var enemyBulletControllers = [enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4];
     var enemy = new Dentonator(canvas, 3.45, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
 } else if (selectedEnemy === "warper") {
-    var enemyBulletController = new BulletController(canvas, 16, "./art/warperbullet.png", false, 32);
-    var enemyBulletController2 = new BulletController(canvas, 1, "./art/warperbullet.png", false, 64);
-    var enemyBulletController3 = new BulletController(canvas, 1, "./art/warperbullet.png", false, 16);
-    var enemyBulletController4 = new BulletController(canvas, 1, "./art/warperbullet.png", false, 16);
+    var enemyBulletController = new BulletController(canvas, 16, "./art/warperbullet.png", false, 32, 12);
+    var enemyBulletController2 = new BulletController(canvas, 1, "./art/warperbullet.png", false, 64, 24);
+    var enemyBulletController3 = new BulletController(canvas, 1, "./art/warperbullet.png", false, 16, 6);
+    var enemyBulletController4 = new BulletController(canvas, 1, "./art/warperbullet.png", false, 16, 6);
     var enemyBulletControllers = [enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4];
     var enemy = new Warper(canvas, 3.45, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
 }
