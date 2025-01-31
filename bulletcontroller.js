@@ -43,12 +43,12 @@ export default class BulletController {
       this.timeTillNextBulletAllowed <= 0 &&
       this.bullets.length < this.maxBulletsAtATime
     ) {    
-      const bullet = new Bullet(this.canvas, x - 20, y, velocity, this.bulletImage, this.bulletSize);
+      const bullet = new Bullet(this.canvas, x - 20, y, velocity, this.bulletImage, this.bulletWidth, this.bulletHeight);
       this.bullets.push(bullet);
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }
   }
-
+  
   checkBulletCollisions(enemyBulletController) {
     this.bullets.forEach((playerBullet) => {
         if (!this.isPlayer) return;

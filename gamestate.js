@@ -23,7 +23,7 @@ const points = new Points();
 canvas.width = 800
 canvas.height = 800
 
-const playerBulletController = new BulletController(canvas, 1, "./art/playerBullet.png", true, 40);
+const playerBulletController = new BulletController(canvas, 1, "./art/playerBullet.png", true, 40, 40);
 const player = new Player(canvas, 8, playerBulletController)
 
 const projectiles = [];
@@ -65,7 +65,7 @@ function game() {
     movingbackground.draw(ctx)
     points.draw(ctx)
     showhp.draw(ctx)
-
+    
     if (localStorage.getItem("currenthp") > 0) {
         enemy.draw(ctx, enemyBulletController, enemyBulletController2, enemyBulletController3, enemyBulletController4)
     } else if (localStorage.getItem("currenthp") == 0) {         
@@ -114,6 +114,15 @@ function game() {
         defeatbutton.draw(ctx);
     }
 }
+canvas.addEventListener('click', function(event) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    if (defeatbutton.isClicked(mouseX, mouseY) && playeralive == false) {
+        defeatbutton.onClick(playeralive);
+    }
+});
+
 
 canvas.addEventListener('click', function(event) {
     const rect = canvas.getBoundingClientRect();
