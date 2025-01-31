@@ -46,7 +46,7 @@ if (selectedEnemy === "dentonator") {
 }
 
 else if (selectedEnemy === "tank") {
-    var enemyBulletController = new BulletController(canvas, 24, "./art/dentonatorbullet.png", false, 50, 50);
+    var enemyBulletController = new BulletController(canvas, 24, "./art/tankbullet.png", false, 50, 50);
     var enemyBulletControllers = [enemyBulletController]
     var enemy = new Tank(canvas, 1.5, enemyBulletController)
 }

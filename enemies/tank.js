@@ -13,7 +13,7 @@ export default class Enemy {
         this.health = 100;
     
         this.image = new Image();
-        this.image.src = "./art/dentonator.png";
+        this.image.src = "./art/tank.png";
     }
 
     takeDamage(amount) {
