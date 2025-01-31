@@ -11,7 +11,9 @@ export default class Enemy {
         this.width = 128;
         this.height = 128;
         this.health = 100;
-    
+        localStorage.setItem("fullhp", this.health)
+        localStorage.setItem("currenthp", this.health)  
+
         this.image = new Image();
         this.image.src = "./art/dentonator.png";
     }
